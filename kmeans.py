@@ -78,7 +78,7 @@ def kmeans(k, distMeasure):
                 newCentroid.append(avg)
             kCentroids.append([newCentroid, []])
         numIterations += 1
-    print("----manhattan clusters for: k=" + str(k) + " ----")
+    print("----" + distMeasure + " clusters for: k=" + str(k) + " ----")
     for num in range(k):
         print("centroid of cluster " + str(num + 1) + ":")
         print(kCentroids[num][0])
@@ -86,27 +86,7 @@ def kmeans(k, distMeasure):
         print(currentClusters[num])
     print("Algorithm converged after " + str(numIterations) + " iterations")
 
-# def kmeansM(k):
-#     previousClustersE = []
-#     kCentroidsE = []
-#     for ind in range(k):
-#         kCentroidsE.append([trainData[ind], []])
-#     for point in range(len(trainData)):
-#         minDistE = sys.float_info.max
-#         minIndexE = numLabels * 4
-#         for c in range(len(kCentroidsE)):
-#             eucDistSq = 0
-#             for i in range(len(trainData[point]) - 1):
-#                 eucDistSq += (float(trainData[point][i]) - float(kCentroidsE[c][0][i]))**2
-#                 i += 1
-#             if math.sqrt(eucDistSq) < minDistE:
-#                 minDistE = math.sqrt(eucDistSq)
-#                 minIndexE = c
-#         kCentroidsE[minIndexE][1].append(point)
-#     print("----euclidean clusters for: k=" + str(k) + " ----")
-#     for num in range(k):
-#         print(kCentroidsE[num][1])
 
 kmeans(numLabels, "Euclidean")
 kmeans(numLabels, "Manhattan")
-#kmeans(numLabels*3)
+#kmeans(numLabels*3, "Euclidean")
