@@ -22,6 +22,37 @@ while dataLine is not "":
 
 numLabels = len(labels)
 
+#call would be wss(k, kCentroids, currentClusters)
+def wss(k, centroid, cluster):
+    wss = 0
+    # sum of (point value minus its cluster center)^2
+    for num in range(k):
+        for item in cluster[num]:
+            for d in range(dimensions):
+                add = (centroids[num][0][d] - trainData[item][d])
+                wss += (add**2)
+    return wss
+
+#call would be bss(k, kCentroids, currentClusters)
+def bss(k,centroids, cluster):
+    dimensions = len(centroids)
+    averageList = []
+    sum =0
+    for d in range(dimensions):
+        for i in range(len(trainData)):
+            sum += trainData[i][d]
+    average = sum / (len(trainData))
+    averageList.append(average)
+    bss = 0
+    for num in range(k):
+        for d in range(dimensions):
+            #WRONG i do not know how to get the indiviual point to subtract
+            # from the average I think I have to use d somewhere
+            bss += abs(averageList[d] - centroids[num][0]) ** 2
+        numInCluster = len(cluster[num])
+        finalB = numInCluster * (bss ** 2)
+        bss += finalB
+    return bss
 
 def kmeans(k, distMeasure):
     previousClusters = []
