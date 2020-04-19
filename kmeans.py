@@ -28,31 +28,31 @@ def wss(k, centroid, cluster):
     # sum of (point value minus its cluster center)^2
     for num in range(k):
         for item in cluster[num]:
-            for d in range(dimensions):
-                add = (centroids[num][0][d] - trainData[item][d])
-                wss += (add**2)
+            add = 0
+            for d in range(len(trainData[0]) - 1):
+                add += abs(centroid[num][0][d] - trainData[item][d])
+            wss += (add**2)
     return wss
 
 #call would be bss(k, kCentroids, currentClusters)
 def bss(k,centroids, cluster):
-    dimensions = len(centroids)
+    dimensions = len(trainData[0]) - 1
     averageList = []
-    sum =0
     for d in range(dimensions):
+        sum = 0
         for i in range(len(trainData)):
             sum += trainData[i][d]
-    average = sum / (len(trainData))
-    averageList.append(average)
-    bss = 0
+        average = sum / (len(trainData))
+        averageList.append(average)
+    total = 0
     for num in range(k):
+        bss = 0
         for d in range(dimensions):
-            #WRONG i do not know how to get the indiviual point to subtract
-            # from the average I think I have to use d somewhere
-            bss += abs(averageList[d] - centroids[num][0]) ** 2
+            bss += abs(averageList[d] - centroids[num][0][d])
         numInCluster = len(cluster[num])
         finalB = numInCluster * (bss ** 2)
-        bss += finalB
-    return bss
+        total += finalB
+    return total
 
 def kmeans(k, distMeasure):
     previousClusters = []
@@ -101,9 +101,11 @@ def kmeans(k, distMeasure):
         print(kCentroids[num][0])
         print("points in cluster " + str(num + 1) + ":")
         print(currentClusters[num])
+    print("The WSS measure is : " + str(wss(k, kCentroids, currentClusters)))
+    print("The BSS measure is : " + str(bss(k, kCentroids, currentClusters)))
     print("Algorithm converged after " + str(numIterations) + " iterations")
 
 
-kmeans(numLabels, "Euclidean")
+#kmeans(numLabels, "Euclidean")
 kmeans(numLabels, "Manhattan")
 #kmeans(numLabels*3, "Euclidean")
