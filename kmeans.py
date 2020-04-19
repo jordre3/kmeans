@@ -1,8 +1,7 @@
 import sys
-import math
 
 
-trainFile = open("SigGene.csv", 'r')
+trainFile = open("smallTest.csv", 'r')
 
 dataLine = trainFile.readline()
 
@@ -20,22 +19,9 @@ while dataLine is not "":
     dataLine = trainFile.readline()
     i += 1
 
-#print(trainData)
-#print(labels)
 
 numLabels = len(labels)
 
-"""
-onexkCentroids = []
-for k in range(numLabels):
-    onexkCentroids.append([trainData[k], []])
-twoxkCentroids = []
-for k in range(numLabels * 2):
-    twoxkCentroids.append([trainData[k], []])
-threexkCentroids = []
-for k in range(numLabels * 3):
-    threexkCentroids.append([trainData[k], []])
-"""
 
 def kmeans(k, distMeasure):
     previousClusters = []
@@ -58,8 +44,8 @@ def kmeans(k, distMeasure):
                         dist += (float(trainData[point][i]) - float(kCentroids[c][0][i]))**2
                 if dist < minDist:
                     minDist = dist
-                    minIndexM = c
-            kCentroids[minIndexM][1].append(point)
+                    minIndex = c
+            kCentroids[minIndex][1].append(point)
         previousClusters = currentClusters
         currentClusters = []
         for num in range(k):

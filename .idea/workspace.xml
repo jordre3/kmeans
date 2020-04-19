@@ -13,8 +13,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/kmeans.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="131">
-              <caret line="57" column="78" lean-forward="true" selection-start-line="57" selection-start-column="78" selection-end-line="57" selection-end-column="78" />
+            <state relative-caret-position="-115">
+              <caret line="27" selection-start-line="27" selection-end-line="27" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -146,16 +146,15 @@
       <option name="presentableId" value="Default" />
       <updated>1587082309174</updated>
       <workItem from="1587082315316" duration="6317000" />
-      <workItem from="1587257508398" duration="4580000" />
+      <workItem from="1587257508398" duration="5734000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10897000" />
+    <option name="totallyTimeSpent" value="12051000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="3" width="1543" height="840" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.09158249" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -186,7 +185,7 @@
     <option name="version" value="1" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/KMeans$kmeans.coverage" NAME="kmeans Coverage Results" MODIFIED="1587262176556" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/KMeans$kmeans.coverage" NAME="kmeans Coverage Results" MODIFIED="1587263296563" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/SigGene.csv">
@@ -202,8 +201,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/kmeans.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="131">
-          <caret line="57" column="78" lean-forward="true" selection-start-line="57" selection-start-column="78" selection-end-line="57" selection-end-column="78" />
+        <state relative-caret-position="-115">
+          <caret line="27" selection-start-line="27" selection-end-line="27" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
