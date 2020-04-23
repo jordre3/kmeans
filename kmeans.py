@@ -1,4 +1,5 @@
 import sys
+import random
 
 
 trainFile = open("smallTest.csv", 'r')
@@ -60,8 +61,9 @@ def kmeans(k, distMeasure):
     currentClusters.append('x')
     kCentroids = []
     numIterations = 0
-    for ind in range(k):
-        kCentroids.append([trainData[ind], []])
+    centroids = random.sample(trainData, k)
+    for ind in centroids:
+        kCentroids.append([ind, []])
     while previousClusters != currentClusters and numIterations < 100:
         for point in range(len(trainData)):
             minDist = sys.float_info.max
