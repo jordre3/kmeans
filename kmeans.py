@@ -148,8 +148,25 @@ def kmeans(k, distMeasure):
     print("The BSS measure is : " + str(bss(k, kCentroids, currentClusters)))
     print("The infoGain measure is : " + str(infoGain(currentClusters)))
     print("Algorithm converged after " + str(numIterations) + " iterations")
+    return ((wss(k, kCentroids, currentClusters)), (bss(k, kCentroids, currentClusters)), (infoGain(currentClusters)))
 
 
 #kmeans(numLabels, "Euclidean")
 kmeans(numLabels, "Manhattan")
 #kmeans(numLabels*3, "Euclidean")
+
+
+
+wTotal = 0.0
+bTotal = 0.0
+infoTotal = 0.0
+for i in range(0, 10):
+        w, b, infoG = kmeans(numLabels, "Manhattan")
+        wTotal = wTotal + w
+        bTotal = bTotal + b
+        infoTotal = infoTotal + infoG
+averageW = wTotal / 10.0
+averageB = bTotal / 10.0
+averageIG = infoTotal / 10.0
+print("\naverage WSS for 10 runs: " + str(averageW) + "\n" + "average BSS for 10 runs: " + str(averageB) + "\n" + "average info gain for 10 runs: " + str(averageIG) + "\n")
+
