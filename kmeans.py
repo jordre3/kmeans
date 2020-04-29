@@ -1,6 +1,6 @@
 import sys
 import random
-
+import math
 
 trainFile = open("smallTest.csv", 'r')
 
@@ -61,6 +61,15 @@ def kmeans(k, distMeasure):
     currentClusters.append('x')
     kCentroids = []
     numIterations = 0
+    
+    ##################################
+    parentEntropy = 0.00
+    for num in range len(currentClusters):
+       pointsInCluster = len(currentClusters[num])
+       allPoints = len(trainData)
+       parentEntropy += - (pointsInCluster/allPoints)*math.log((pointsInCluster/allPoints), 2)
+    #################################
+    
     centroids = random.sample(trainData, k)
     for ind in centroids:
         kCentroids.append([ind, []])
@@ -97,6 +106,24 @@ def kmeans(k, distMeasure):
                 newCentroid.append(avg)
             kCentroids.append([newCentroid, []])
         numIterations += 1
+        
+    #################################
+    for num in range len(currentClusters):
+        lCount = []
+        for i in len(currentClusters[num]):
+           index = labels.index(currentClusters[num][i])
+           lCount[index] = lCount[index] + 1
+        #fPIC means points in cluster
+        fPIC = len(currentClusters[num])
+        fAllPoints = len(trainData)
+        weightedEntropy = 0.0
+        for j in len(lCount):
+          weightedEntropy += (fPIC/fAllPoints) * (-lCount[j]/fPIC*math.log((lCount[j]/fPIC), 2))
+
+        infoGain = parentEntropy - weightedEntropy
+        print("info gain: "+ infoGain)
+    #################################
+    
     print("----" + distMeasure + " clusters for: k=" + str(k) + " ----")
     for num in range(k):
         print("centroid of cluster " + str(num + 1) + ":")
