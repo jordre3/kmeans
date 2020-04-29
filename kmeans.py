@@ -55,6 +55,40 @@ def bss(k,centroids, cluster):
         total += finalB
     return total
 
+
+def infoGain(currentClusters):
+    parentEntropy = 0.00
+    lCount = []
+    for x in range(len(labels)):
+        lCount.append(0)
+    for point in trainData:
+        index = labels.index(point[len(point) - 1])
+        lCount[index] += 1
+    for j in range(len(lCount)):
+        if lCount[j] != 0:
+            parentEntropy += (-lCount[j] / len(trainData) * math.log((lCount[j] / len(trainData)), 2))
+    infoGain = parentEntropy
+    for num in range(len(currentClusters)):
+        lCount = []
+        for x in range(len(labels)):
+            lCount.append(0)
+        for i in currentClusters[num]:
+            # print(num, i)
+            # print(trainData[i])
+            # print(trainData[i][len(trainData[0]) - 1])
+            index = labels.index(trainData[i][len(trainData[0]) - 1])
+            lCount[index] = lCount[index] + 1
+        # fPIC means points in cluster
+        fPIC = len(currentClusters[num])
+        fAllPoints = len(trainData)
+        entropy = 0.0
+        for j in range(len(lCount)):
+            if lCount[j] != 0:
+                entropy += (-lCount[j] / fPIC * math.log((lCount[j] / fPIC), 2))
+
+        infoGain -= entropy * (fPIC / fAllPoints)
+    return infoGain
+
 def kmeans(k, distMeasure):
     previousClusters = []
     currentClusters = []
@@ -63,11 +97,7 @@ def kmeans(k, distMeasure):
     numIterations = 0
     
     ##################################
-    parentEntropy = 0.00
-    for num in range len(currentClusters):
-       pointsInCluster = len(currentClusters[num])
-       allPoints = len(trainData)
-       parentEntropy += - (pointsInCluster/allPoints)*math.log((pointsInCluster/allPoints), 2)
+
     #################################
     
     centroids = random.sample(trainData, k)
@@ -106,23 +136,7 @@ def kmeans(k, distMeasure):
                 newCentroid.append(avg)
             kCentroids.append([newCentroid, []])
         numIterations += 1
-        
-    #################################
-    for num in range len(currentClusters):
-        lCount = []
-        for i in len(currentClusters[num]):
-           index = labels.index(currentClusters[num][i])
-           lCount[index] = lCount[index] + 1
-        #fPIC means points in cluster
-        fPIC = len(currentClusters[num])
-        fAllPoints = len(trainData)
-        weightedEntropy = 0.0
-        for j in len(lCount):
-          weightedEntropy += (fPIC/fAllPoints) * (-lCount[j]/fPIC*math.log((lCount[j]/fPIC), 2))
 
-        infoGain = parentEntropy - weightedEntropy
-        print("info gain: "+ infoGain)
-    #################################
     
     print("----" + distMeasure + " clusters for: k=" + str(k) + " ----")
     for num in range(k):
@@ -132,6 +146,7 @@ def kmeans(k, distMeasure):
         print(currentClusters[num])
     print("The WSS measure is : " + str(wss(k, kCentroids, currentClusters)))
     print("The BSS measure is : " + str(bss(k, kCentroids, currentClusters)))
+    print("The infoGain measure is : " + str(infoGain(currentClusters)))
     print("Algorithm converged after " + str(numIterations) + " iterations")
 
 
